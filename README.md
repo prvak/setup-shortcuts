@@ -7,23 +7,23 @@ I use in [MATE](http://mate-desktop.org/) desktop environment in
 of manually setting up these shortcuts every time I reinstalled the system :)
 
 
-Dependencies:
--------------
+Dependencies
+------------
 
 Beside obvious dependency on MATE desktop environment. Main script 
-`setup_shortcuts.sh` requires Python 2.5. Script for positioning windows
-requires `wmctrl` package.
+`setup_shortcuts.py` requires Python 2.5. Script for positioning windows
+`resize_window.bash` requires program `wmctrl`.
 
 
 Usage
 -----
 
-Get the scripts: `git clone https://github.com/prvak/shortcuts.git`
-Modify shortcuts to your likings: `vi shortcuts.cfg `
-Setup the shortcuts: `./setup_shortcuts.py` (this should be run from 
+1. Get the scripts: `git clone https://github.com/prvak/shortcuts.git`
+2. Modify shortcuts to your likings: `vi shortcuts.cfg `
+3. Setup the shortcuts: `python ./setup_shortcuts.py` (this should be run from 
 the scripts directory)
-Logout and login for the shortcuts to take effect.
+4. Logout and login for the shortcuts to take effect.
 
 ---------
 
-	Michal
+  Michal
