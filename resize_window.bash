@@ -7,9 +7,42 @@ eval $(xprop -root |sed -rne 's/^_NET_WORKAREA\(CARDINAL\) = ([0-9]+), ([0-9]+),
 
 [[ -z "$a" ]] && exit 1
 case "$1" in
-	top    ) ((h=(h/2)-20));((w=7*(w/12)-10));;
-	bottom ) ((y=y+(h-(h/2)+20)));((h=(h/2)-20));((w=7*(w/12)-10));;
-	left   ) ((w=7*(w/12)-10));; # -10 because left and right window overlapped
-	right  ) ((x=(w-5*(w/12))));((w=5*(w/12)));;
+	maximized) 
+		wmctrl -i -r "$a" -b "add,maximized_vert,maximized_horz";;
+	not-maximized) 
+		wmctrl -i -r "$a" -b "remove,maximized_vert,maximized_horz";;
+	shaded) 
+		wmctrl -i -r "$a" -b "add,shaded";;
+	top-left-thirds) 
+		((h=(h/2)-20));
+		((w=7*(w/12)-10));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	bottom-left-thirds) 
+		((y=y+(h-(h/2)+20)));
+		((h=(h/2)-20));
+		((w=7*(w/12)-10));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	top-left) 
+		((h=(h/2)-20));
+		((w=w/2-5));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	bottom-left) 
+		((y=y+(h-(h/2)+20)));
+		((h=(h/2)-20));
+		((w=w/2-5));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	left) 
+		((w=w/2-5));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	right) 
+		((x=(w-w/2)));
+		((w=w/2-5));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	left-thirds) 
+		((w=7*(w/12)-10)); # -10 because left and right window overlapped
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
+	right-third) 
+		((x=(w-5*(w/12))));
+		((w=5*(w/12)));
+		wmctrl -i -r "$a" -e 0,$x,$y,$w,$h;;
 esac
-wmctrl -i -r "$a" -e 0,$x,$y,$w,$h

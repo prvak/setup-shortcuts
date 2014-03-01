@@ -1,7 +1,14 @@
-#/usr/bin/python
+#!/usr/bin/python
 import os
 import time
 import string
+import argparse
+
+parser = argparse.ArgumentParser(
+        description="Create shortcut files.")
+parser.add_argument("config", type = str,
+        help="path to the configuration file")
+args = parser.parse_args()
 
 # constants
 home = os.path.expandvars("$HOME") # users home directory
@@ -9,7 +16,7 @@ template_file = "mateconf.xml.template"
 keybindings_directory = home + "/.mateconf/desktop/mate/keybindings/"
 shortcut_directory = keybindings_directory + "custom%d/"
 shortcut_file = "%mateconf.xml" # the name actually starts with the %
-configuration_file = "shortcuts.cfg"
+configuration_file = args.config
 
 # Read configuration file, this file defines all shortcuts.
 with open(configuration_file) as cf:
